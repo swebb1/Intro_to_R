@@ -1,0 +1,17 @@
+---
+title: "Introduction to R Workshop"
+---
+
+------------------------------------------------------------------------
+
+This is the homepage for R training at the DRP-HCB Bioinformatics Core at the University of Edinburgh. These courses are run annually by the Bioinformatics Core but also available upon request.
+
+<br>
+
+![](images/logo.png)
+
+<br>
+
+------------------------------------------------------------------------
+
+For more information contact [Shaun Webb](mailto:shaun.webb@ed.ac.uk).
