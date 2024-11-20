@@ -26,7 +26,9 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 -   Use additional libraries such as `plotly` to enhance the utility of graphics.
 :::
 
-**ggplot2** is a plotting package that makes it simple to create complex plots from data in a data frame. It provides a grammar for specifying which variables to plot, how they are displayed, and general visual properties. Therefore, we only need minimal changes to our code if the underlying data change or if we decide to switch from a bar plot to a scatterplot. This helps to create publication quality plots with minimal adjustments and tweaking.
+<br>
+
+`ggplot2` is a plotting package that makes it simple to create complex plots from data in a data frame. It provides a grammar for specifying which variables to plot, how they are displayed, and general visual properties. Therefore, we only need minimal changes to our code if the underlying data change or if we decide to switch from a bar plot to a scatterplot. This helps to create publication quality plots with minimal adjustments and tweaking.
 
 First, make sure you load all of the required libraries and datasets. There are quite a few new libraries here and we will explain them as we go.
 
@@ -49,8 +51,6 @@ surveys <- read_csv("http://bifx-core3.bio.ed.ac.uk/training/R_dplyr_and_ggplot2
 ```
 
 ## Fisher's Iris dataset (pre-installed in R)
-
-------------------------------------------------------------------------
 
 ![](images/iris.png)
 
@@ -162,7 +162,7 @@ Here is an example of the histogram geometry:
 
 ```{r}
 #Create a new version of the iris dataset with a new column
-iris2<- iris %>% mutate(Sepal.Ratio=Sepal.Length/Sepal.Width)
+iris2 <- iris |> mutate(Sepal.Ratio=Sepal.Length/Sepal.Width)
 #Visualise the distribution of Sepal.Ratio with a histogram
 h<- ggplot(iris2, aes(Sepal.Ratio, fill=Species )) +
   geom_histogram(binwidth=0.1)
@@ -214,7 +214,7 @@ To change the axes we can use another function called coord_flip()
 b + coord_flip()
 ```
 
-We can reorder the `Species` by the median `Sepal.Width` for display purposes. The **forcats** package in the **tidyverse** has lots of functions for ordering, labelling and manipulating factors (discrete / categorical variables).
+We can reorder the `Species` by the median `Sepal.Width` for display purposes. The `forcats` package in the `tidyverse` has lots of functions for ordering, labelling and manipulating factors (discrete / categorical variables).
 
 ```{r}
 b <- ggplot(iris, aes(x=fct_reorder(Species,Sepal.Width), y=Sepal.Width )) + 
@@ -354,7 +354,7 @@ We can then reuse a theme, for example on the histogram we made earlier.
 h + theme_for_nature
 ```
 
-R-studio will offer help finding themes after typing "theme\_". Give some of them a try. The **ggthemes** and **ggpubr** packages also contain a selection of prebuilt themes e.g:
+R-studio will offer help finding themes after typing "theme\_". Give some of them a try. The `ggthemes` and `ggpubr` packages also contain a selection of prebuilt themes e.g:
 
 ```{r}
 library(ggthemes)
@@ -383,7 +383,7 @@ q
 
 To change the colours we need to use the `scale_color_*` functions of which there are many. Some are built into **ggplot2** and others exist in external packages such as **viridis** or **ggthemes**. The [viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) and [ColorBrewer](https://www.datanovia.com/en/blog/the-a-z-of-rcolorbrewer-palette/) palettes are particularly useful and worth investigating. The [ggsci](https://cran.r-project.org/web/packages/ggsci/vignettes/ggsci.html) package contains palletes based on key scientific journals.
 
-### **Continuous scales**
+### Continuous scales
 
 Try the different scale options in the code below:
 
@@ -404,7 +404,7 @@ An alternative method is to use the `scale_colour_gradient*` functions to define
 q + scale_color_gradient2(high="darkred", low="white",  mid="red", midpoint=2)
 ```
 
-### **Discrete scales**
+### Discrete scales
 
 There are also colour scales for discrete variables. Note that we must use `fill` for colouring boxes.
 
@@ -492,7 +492,7 @@ The `facet_grid()` function is useful when you are splitting by multiple factors
 ```{r}
 countries <- c("Italy", "Spain", "France", "UK")
 #Sample will randomly select a value for each row
-iris2 <- iris2 %>% mutate(Country=sample(countries,nrow(iris2),replace=TRUE))
+iris2 <- iris2 |> mutate(Country=sample(countries,nrow(iris2),replace=TRUE))
 
 q2 <- ggplot(iris2, aes(x = Petal.Length, y = Petal.Width, colour = Sepal.Ratio)) +
   geom_point()
@@ -514,10 +514,10 @@ Use dplyr and ggplot to display the mean petal length for each species in each c
 <h2><i class="far fa-eye"></i> Solution:</h2>
 
 ```{r,  purl=FALSE}
-iris2 %>% 
-filter(Country != "France") %>% 
-group_by(Species,Country) %>% 
-summarise(Mean=mean(Petal.Length)) %>% 
+iris2 |>
+filter(Country != "France") |> 
+group_by(Species,Country) |>
+summarise(Mean=mean(Petal.Length)) |> 
 ggplot(aes(x=Country, y=Mean, colour=Species)) + geom_point(size=4) + facet_wrap(~Species) + labs(title="Mean Petal Length")
 ```
 :::
@@ -525,9 +525,9 @@ ggplot(aes(x=Country, y=Mean, colour=Species)) + geom_point(size=4) + facet_wrap
 </details>
 :::
 
-## **Adding labels**
+## Adding labels
 
-You can add labels to points in your graphs. One of the best ways to do this is to use the package **ggrepel**.
+You can add labels to points in your graphs. One of the best ways to do this is to use the package `ggrepel`.
 
 ```{r}
 library(ggrepel)
@@ -538,9 +538,9 @@ ggplot(iris2,aes(Petal.Width,Petal.Length,colour=Sepal.Ratio)) +
   geom_label_repel(aes(label=ifelse(Petal.Length > 6.4 ,as.character(Species),'')))
 ```
 
-### **Highlight points or lines**
+### Highlight points or lines
 
-You can choose to highlight specific points or lines using **gghighlight**:
+You can choose to highlight specific points or lines using `gghighlight`:
 
 ```{r}
 library(gghighlight)
@@ -570,16 +570,33 @@ Spend the remaining time playing around with the different ggplot options and se
 
 ## Arranging multiple plots
 
-Placing ggplots side by side can be performed with packages like **gridExtra** and **patchwork**. [Patchwork](https://github.com/thomasp85/patchwork) uses simple formulas to arrange ggplots:
+Placing ggplots side by side can be performed with packages like `gridExtra` and `patchwork`. [Patchwork](https://github.com/thomasp85/patchwork) uses simple formulas to arrange ggplots:
 
-```{r,fig.width=8}
+```{r}
+#| fig-height: 6
+#| fig-width: 6
 library(patchwork)
 #On top
 q/bp
+```
+
+```{r}
+#| fig-height: 3
+#| fig-width: 8
 #Side by side
 q+bp
+```
+
+```{r}
+#| fig-height: 6
+#| fig-width: 8
 #2 plots on top, 1 on bottom
 (q+h)/bp
+```
+
+```{r}
+#| fig-height: 6
+#| fig-width: 7
 #Collect the guides together on one side
 (q+h)/bp + plot_layout(guides = "collect")
 ```
@@ -587,18 +604,17 @@ q+bp
 Use `ggsave` to save the image:
 
 ```{r, eval=F}
-#On top
 ggsave("DoublePlot.png",q/bp)
 ```
 
-## More useful functions to try
+## Additional functions to try
 
-### **Cut functions**
+### Cut functions
 
 The `cut_*` functions in ggplot2 can turn continous data into discrete levels. In this example we create a new column that puts the data into 5 groups of equal size based on `Sepal.Length`:
 
 ```{r}
-iris2 <- iris2 %>% mutate(Sepal.Length.Group=cut_number(Sepal.Length,5))
+iris2 <- iris2 |> mutate(Sepal.Length.Group=cut_number(Sepal.Length,5))
 
 ggplot(iris2,aes(Sepal.Length,Sepal.Width,fill = Sepal.Length.Group)) +  
   geom_violin() +
@@ -609,7 +625,7 @@ Note the use of the `labs()` function to change multiple labels at once.
 
 Have a look at the difference between the `cut_number`, `cut_interval` and `cut_width` functions.
 
-### **Scaling data**
+### Scaling data
 
 Let's look at a larger dataset like the `surveys_complete` data we used earlier:
 
@@ -630,28 +646,26 @@ ggplot(surveys,aes(weight,hindfoot_length))+geom_point() +
   scale_x_log10()
 ```
 
-<br>
-
 ::: discussion
 <h2><i class="far fa-bell"></i> Discussion</h2>
 
-What is the difference between these two plots?
+What is the difference between these three plots?
 :::
 
-### **Interactive graphs with Plotly and ggiraph**
+### Interactive graphs with Plotly and ggiraph
 
 [Plotly](https://plot.ly/ggplot2) for ggplot2 is a browser-based charting library that converts ggplots into interactive visualisations:
 
 ```{r}
 library(plotly)
-p2<-ggplot(iris2,aes(Sepal.Length,Sepal.Width,colour=Species))+geom_point()
+p2<-ggplot(iris2,aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) + geom_point()
 gp2<-ggplotly(p2)
 ```
 
 By default the mouse over text is what is mapped in the aesthetics. You can add a `text` aesthetic to add this to the tooltip text.
 
 ```{r,warning=F}
-p2 <- p2+ geom_point(aes(text=Country))
+p2 <- p2+ geom_point(aes(text = Country))
 gp2<-ggplotly(p2)
 ```
 
@@ -662,6 +676,8 @@ Interactive `plotly` graphics open in the *Viewer* pane in Rstudio and can be em
 gp2
 ```
 
+<br>
+
 You can save plotly objects as html web pages:
 
 ```{r eval=F}
@@ -670,19 +686,19 @@ htmlwidgets::saveWidget(as_widget(gp2), "plotly_image.html")
 
 [ggiraph](https://davidgohel.github.io/ggiraph/index.html) is another package that allows you to create interactive graphics. It is particularly useful for creating interactive plots for the web.
 
-Instead of geom_point() we use geom_point_interactive() and then use the `girafe()` function to render the plot. The tooltip is set in the aesthetics.
+Instead of `geom_point()` we use `geom_point_interactive()` from the ggiraph package. We then use the `girafe()` function to render the plot. The tooltip is set in the aesthetics.
 
 ```{r}
 library(ggiraph)
-gg <- ggplot(iris2, aes(x = Sepal.Length, y = Sepal.Width, tooltip = Species)) +
+gg <- ggplot(iris2, aes(x = Sepal.Length, y = Sepal.Width,  colour = Species, tooltip = Country)) +
   geom_point_interactive()
 
 girafe(ggobj = gg)
 ```
 
-### **Creating detailed graphics with ggpubr**
+### Creating detailed graphics with ggpubr**
 
-The **ggpubr** package provides wrapper functions for ggplot that make it easier to generate complex, publication ready graphics. It includes functions for running statistical tests and displaying the results in the plot. After using ggpubr, you will need to reset your theme with `theme_set()`.
+The `ggpubr` package provides wrapper functions for ggplot that make it easier to generate complex, publication ready graphics. It includes functions for running statistical tests and displaying the results in the plot. After using ggpubr, you will need to reset your theme with `theme_set()`.
 
 ```{r, warning=F}
 # Violin plots with box plots inside
@@ -698,7 +714,7 @@ ggviolin(df, x = "dose", y = "len", fill = "dose",
   stat_compare_means(label.y = 50)                                      # Add p-value 
 ```
 
-The next example additionally uses the library **cowplot** to add density plots within the margins of the main figure. Don't worry if you get lost here, this is just a demonstration of what's possible in R and beyond the scope of this course.
+The next example additionally uses the library `cowplot` to add density plots within the margins of the main figure. Don't worry if you get lost here, this is just a demonstration of what's possible in R and beyond the scope of this course.
 
 ```{r}
 library(cowplot) 
@@ -722,8 +738,6 @@ p1 <- insert_xaxis_grob(pmain, xdens, grid::unit(.2, "null"), position = "top")
 p2<- insert_yaxis_grob(p1, ydens, grid::unit(.2, "null"), position = "right")
 ggdraw(p2)
 ```
-
-<br>
 
 ::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>

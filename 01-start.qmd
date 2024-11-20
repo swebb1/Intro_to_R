@@ -49,7 +49,7 @@ The are 4 main panes, each with several tabs:
 
 You can customise the appearance of RStudio under the Tools -\> Global Options... menu.
 
-### **Setting up a new project**
+### Setting up a new project
 
 There is a drop-down **project** menu at the top right of RStudio. Click this, select "New Project..." and create one in a new directory. Make sure you have write permission for the directory you choose.
 

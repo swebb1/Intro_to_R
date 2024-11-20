@@ -21,7 +21,9 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 -   Understand the reason and methods for long and wide data formats
 :::
 
-The **dplyr** package is specifically designed for data formatting and manipulation and allows you to merge datasets and create new columns as well as filtering and summarising your data. We are going to learn some of the most common functions.
+<br>
+
+The `dplyr` package is specifically designed for data formatting and manipulation and allows you to merge datasets and create new columns as well as filtering and summarising your data. We are going to learn some of the most common functions.
 
 ## Selecting columns and filtering rows
 
@@ -87,7 +89,7 @@ surveys |>
 
 Here we are 'piping' the `surveys` dataset through the `filter()` function, then through `select()`. Since `|>` takes the object on its left and passes it as the first argument to the function on its right, we don't need to explicitly include the tibble as an argument to the `filter()` and `select()` functions any more.
 
-Some may find it helpful to read the pipe like the word "then". For instance, in the above example, we took the data frame `surveys`, *then* we `filter`ed for rows with `weight < 5`, *then* we `select`ed columns `species_id`, `sex`, and `weight`. The **dplyr** functions by themselves are somewhat simple, but by combining them into linear workflows with the pipe, we can accomplish more complex manipulations of data.
+Some may find it helpful to read the pipe like the word "then". For instance, in the above example, we took the data frame `surveys`, *then* we `filter`ed for rows with `weight < 5`, *then* we `select`ed columns `species_id`, `sex`, and `weight`. The `dplyr` functions by themselves are somewhat simple, but by combining them into linear workflows with the pipe, we can accomplish more complex manipulations of data.
 
 If we want to create a new object with this smaller version of the data, we can assign it a new name:
 
@@ -245,7 +247,7 @@ surveys_hindfoot_cm <- surveys |>
 
 ## Group_by and summarise
 
-Many data analysis tasks can be approached using the *split-apply-combine* paradigm: split the data into groups, apply some analysis to each group, and then combine the results. **dplyr** makes this very easy through the use of the `group_by()` function.
+Many data analysis tasks can be approached using the *split-apply-combine* paradigm: split the data into groups, apply some analysis to each group, and then combine the results. `dplyr` makes this very easy through the use of the `group_by()` function.
 
 `group_by()` is often used together with `summarise()`, which collapses each group into a single-row summary of that group. The `group_by()` function takes the column names that contain the grouping variables for which you want to calculate summary statistics. The `summarise()` function computes a summary statistic for each group using a specified function and variable. So to compute the mean `weight` by sex:
 
@@ -294,7 +296,7 @@ surveys |>
 
 ## Count
 
-When working with data, we often want to know the number of observations found for each factor or combination of factors. For this task, **dplyr** provides `count()`. For example, if we wanted to count the number of rows of data for each sex, we would do:
+When working with data, we often want to know the number of observations found for each factor or combination of factors. For this task, `dplyr` provides `count()`. For example, if we wanted to count the number of rows of data for each sex, we would do:
 
 ```{r, eval = F, purl = FALSE}
 surveys |>
@@ -393,6 +395,8 @@ surveys |>
 </details>
 :::
 
+<br>
+
 ::: discussion
 <h2><i class="far fa-bell"></i> Discussion</h2>
 
@@ -403,7 +407,7 @@ surveys |>
 
 ## Pivoting functions in tidyr
 
-The **tidyr** package contains the functions `pivot_longer()` and `pivot_wider()` which allow you to transform a dataset between *long* and *wide* formats. For instance, what if we wanted to compare the mean weights of each species at each plot (using plot_id).
+The `tidyr` package contains the functions `pivot_longer()` and `pivot_wider()` which allow you to transform a dataset between *long* and *wide* formats. For instance, what if we wanted to compare the mean weights of each species at each plot (using plot_id).
 
 We'd need to create a new table where each row is comprised of values of variables associated with each plot. In practical terms this means the values in `genus` would become the names of column variables and the cells would contain the values of the mean weight observed on each plot.
 

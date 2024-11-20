@@ -20,7 +20,9 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 -   Get to know some of the Tidyverse packages
 :::
 
-The **`tidyverse`** is a suite of packages that includes libraries such as **`dplyr`** and **`ggplot2`**. These packages are designed for data science and share underlying principles, grammar and data structures. There are many ways to do the same thing in R, but following the philosophy of *tidy data* and using the **`tidyverse`** packages will keep your datasets organised and make analysis easier in the long run.
+<br>
+
+The `tidyverse` is a suite of packages that includes libraries such as `dplyr` and `ggplot2`. These packages are designed for data science and share underlying principles, grammar and data structures. There are many ways to do the same thing in R, but following the philosophy of *tidy data* and using the `tidyverse` packages will keep your datasets organised and make analysis easier in the long run.
 
 ## Tidy data
 
@@ -32,9 +34,9 @@ Data can be represented in many different ways across multiple tables but the ti
 
 ![](images/tidy.png)
 
-This is the optimal structure when working in R and provides consistency amongst your datasets. Getting your data into R and wrangling it into the correct format is always the first step in your analysis. Fortunately, the **`tidyr`** package contains many functions to *tidy* up your dataset.
+This is the optimal structure when working in R and provides consistency amongst your datasets. Getting your data into R and wrangling it into the correct format is always the first step in your analysis. Fortunately, the `tidyr` package contains many functions to *tidy* up your dataset.
 
-We will start by reading in a dataset. The **`readr`** package has functions for importing data as **tibbles**. Tibbles are the tidyverse compatible version of an R dataframe. They have stricter formatting and allow you to perform grouping of variables as we will see in the next section.
+We will start by reading in a dataset. The `readr` package has functions for importing data as **tibbles**. Tibbles are the tidyverse compatible version of an R dataframe. They have stricter formatting and allow you to perform grouping of variables as we will see in the next section.
 
 ```{r, results='hide'}
 library(tidyverse)
@@ -54,6 +56,8 @@ surveys <- read_csv("http://bifx-core3.bio.ed.ac.uk/training/R_dplyr_and_ggplot2
 -   Look at the options available in the `read_csv` and compare this with the `read.table` function we saw earlier.
 -   What other `readr` functions can you find?
 :::
+
+<br>
 
 This dataset contains observations from a field survey of different organisms at different sites (plots). Let's inspect the data.
 
