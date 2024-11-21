@@ -8,7 +8,7 @@ This is the homepage for R training at the DRP-HCB Bioinformatics Core at the Un
 
 <br>
 
-![](images/logo.png)
+![](images/DRP_banner_transparent2.png)
 
 <br>
 
