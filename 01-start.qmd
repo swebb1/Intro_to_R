@@ -15,11 +15,17 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 
 ------------------------------------------------------------------------
 
-We recommend using [RStudio](https://rstudio.com/) for this workshop. [RStudio](https://www.rstudio.com/) is an Integrated Development Environment (IDE) for R. It can be accessed in several ways. Download [RStudio](https://rstudio.com/) and install it on your own computer.
+We recommend using [RStudio](https://docs.posit.co/ide/user/) for this workshop. RStudio is an Integrated Development Environment (IDE) for R. It can be accessed in several ways.
 
-If you have an account on the DRP-HCB Bioinformatics servers, you can also access RStudio server online.
+-   Download RStudio Desktop and install it on your own computer.
+
+    -   [Install R and RStudio](https://posit.co/download/rstudio-desktop/)
+
+-   If you have an account on the DRP-HCB Bioinformatics servers, you can also access our RStudio server online.
 
 ## Using RStudio
+
+A comprehensive RStudio user guide is available [here](https://docs.posit.co/ide/user/).
 
 ::: row
 ::: col-md-6
@@ -28,14 +34,14 @@ The are 4 main panes, each with several tabs:
 -   **Console** (bottom left)
     -   Here you can type commands into R
     -   Additional tabs may include a terminal and script outputs
--   **Editor** (top left)
+-   **Source** (top left)
     -   Open and view files
     -   These can be raw txt, scripts or markdown
--   **Environment** (top right)
+-   **Environments** (top right)
     -   Objects you have stored
     -   Commands you have typed
     -   Additional tabs for version control, database and website building...
--   **Files and output** (bottom right)
+-   **Output** (bottom right)
     -   System files (on the computer/server you are working on)
     -   Output from plots or applications
     -   Packages available
@@ -43,7 +49,7 @@ The are 4 main panes, each with several tabs:
 :::
 
 ::: col-md-6
-![](images/rstudio-windows.png)
+![](images/Rstudio_panes.png)
 :::
 :::
 
@@ -91,7 +97,7 @@ Install the packages we need for these lessons by running the code below in the 
 ```{r, eval=FALSE}
 
 #install from CRAN with install.packages()
-install.packages(c("tidyverse", "ggthemes","ggrepel","viridis","RColorBrewer","ggsci","gghighlight","plotly","ggpubr","rstatix","patchwork","cowplot","ggiraph"))
+install.packages(c("tidyverse", "ggthemes", "ggrepel", "viridis", "RColorBrewer", "ggsci", "gghighlight", "plotly", "ggpubr", "rstatix", "patchwork", "cowplot", "ggiraph"))
 
 #Example to install from bioconductor with BiocManager
 #if (!requireNamespace("BiocManager", quietly = TRUE))
