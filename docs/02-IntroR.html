@@ -184,6 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#saving-images" id="toc-saving-images" class="nav-link" data-scroll-target="#saving-images">Saving images</a></li>
   <li><a href="#statistical-testing" id="toc-statistical-testing" class="nav-link" data-scroll-target="#statistical-testing">Statistical testing</a>
   <ul class="collapse">
+  <li><a href="#difference-between-means" id="toc-difference-between-means" class="nav-link" data-scroll-target="#difference-between-means">Difference between means</a></li>
   <li><a href="#t-test" id="toc-t-test" class="nav-link" data-scroll-target="#t-test">T-Test</a></li>
   <li><a href="#non-parametric-testing" id="toc-non-parametric-testing" class="nav-link" data-scroll-target="#non-parametric-testing">Non-Parametric Testing</a></li>
   <li><a href="#paired-samples" id="toc-paired-samples" class="nav-link" data-scroll-target="#paired-samples">Paired samples</a></li>
@@ -472,11 +473,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="getting-data-into-r" class="level2">
 <h2 class="anchored" data-anchor-id="getting-data-into-r">Getting data into R</h2>
 <p>For a beginner, this can be the hardest part, it is also the most important part to get right.</p>
-<p>It is possible to create a vector by typing data directly into R using the combine function <code>c</code>. Think of it as a concatenate or combine function.</p>
+<p>It is possible to create a vector by typing data directly into R using the function <code>c</code>. Think of it as a concatenate or combine function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>x   <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This creates a vector named ‘x’ which stores the numbers 1-5.</p>
+<p>This creates a vector named ‘x’ which stores the numbers 1 - 5.</p>
 <p>You can see what is in an object at any time by typing its name:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -484,7 +485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 1 2 3 4 5</code></pre>
 </div>
 </div>
-<p>Character values needs to be quoted, otherwise R will look for a data object of that name.</p>
+<p>Character values need to be quoted, otherwise R will look for a data object of that name.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>daysofweek <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Monday"</span>, <span class="st">"Tuesday"</span>, <span class="st">"Wednesday"</span>, <span class="st">"Thursday"</span>, <span class="st">"Friday"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -525,7 +526,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>There is <strong>no</strong> header row (labels for the columns)</li>
 <li>There is no column with names for the rows</li>
 </ul>
-<p>If any of these are FALSE, we need to tell that to the function. If it has a header column use ‘header=TRUE’ argument.</p>
+<p>If any of these are FALSE, we need to tell that to the function. If it has a header column use the ‘header=TRUE’ argument.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"http://bifx-core3.bio.ed.ac.uk/data.tsv"</span>, <span class="at">header=</span><span class="cn">TRUE</span>)  <span class="co"># header=T also works</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -552,7 +553,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="other-options-for-read.table" class="level3">
 <h3 class="anchored" data-anchor-id="other-options-for-read.table">Other options for read.table</h3>
-<p>Use <code>sep=</code> to define how columns are separated in your input file. This file uses the tab character which we can write as ’.</p>
+<p>Use <code>sep=</code> to define how columns are separated in your input file. This file uses the tab character which we can write as “\t”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mydata  <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"http://bifx-core3.bio.ed.ac.uk/data.tsv"</span>, <span class="at">header=</span>T, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -914,10 +915,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </h2>
 <p>Please see our <a href="https://docs.google.com/presentation/d/1qmtT3W6oylWs9xxeJ0WsNHyHbK6TiUJQsEQtFFVpMtU/edit?usp=sharing">introduction to statistics</a> document for more information on distributions, hypothesis testing and statistical significance.</p>
 </div>
-<p><br></p>
-<p>Let’s say we want to determine whether the means of two groups of data differ statistically. First, we need to know if we are dealing with parametric or non-parametric data, i.e.&nbsp;are they normally distributed?</p>
+<section id="difference-between-means" class="level3">
+<h3 class="anchored">Difference between means</h3>
+<p>Let’s say we want to determine whether the means of two groups of data differ statistically. First, we need to know if we are dealing with parametric or non-parametric data to choose the appropriate test i.e.&nbsp;are they normally distributed?</p>
 <div class="challenge">
-<h2 class="anchored">
+<h2 class="anchored" data-anchor-id="difference-between-means">
 <i class="fas fa-pencil-alt"></i> Challenge:
 </h2>
 <p>Plot a histogram for each vector in mydata to visualise the distributions of each dataset.</p>
@@ -1053,6 +1055,7 @@ W = 0.96665, p-value = 0.5162</code></pre>
 </h2>
 <p>You should only use parametric tests for parametric data!</p>
 </div>
+</section>
 <section id="t-test" class="level3">
 <h3 class="anchored">T-Test</h3>
 <p>The assumption for a t-test is that both groups are sampled from normal distributions with approximately equal variance. We can only use this test if the data is normally distributed. As columns A and E are both normally distributed we can use a Two Sample t-test to test if the mean values are statistically different. Our null hypothesis is that the two means are equal, and the alternative is that they are not.</p>
@@ -1086,7 +1089,7 @@ mean of x mean of y
  4.296296  4.407407 </code></pre>
 </div>
 </div>
-<p>The p-value of the test is 0.8032, which is greater than the significance level 0.05. We can conclude that A and E are NOT significantly different. You can also save the result as an object and print the p-value:</p>
+<p>The p-value of the test is 0.8032, which is greater than the significance level 0.05. We can conclude that means of A and E are NOT significantly different. You can also save the result as an object and print the p-value:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>a_e_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(A,E)</span>
 <span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>a_e_result<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1119,8 +1122,8 @@ W = 503.5, p-value = 0.01496
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
-<p>Non parametric tests look at the ranks of values. If the same value appears multiple times in a dataset then their ranks are tied. R will output a warning if tied ranks exist. We can ignore it in this case but should be wary if there are many ties in our data.</p>
-<p>The p-value of the test is <code>0.01496</code>, which is less than the significance level alpha = 0.05. We can conclude that A is significantly different from D.</p>
+<p>Non parametric tests look at the ranks of values. If the same value appears multiple times in a dataset then the ranks will also be identical. R will output a warning if “tied ranks” exist. We can ignore it in this case but should be wary if there are many ties in our data.</p>
+<p>The p-value of the test is <code>0.01496</code>, which is less than the significance level alpha = 0.05. We can conclude that the mean of A is significantly different from the mean of D.</p>
 </section>
 <section id="paired-samples" class="level3">
 <h3 class="anchored">Paired samples</h3>
@@ -1227,6 +1230,7 @@ mean difference
 <pre><code> [1] 0.001 0.400 0.009 0.700 0.700 0.700 0.700 1.000 1.000 1.000</code></pre>
 </div>
 </div>
+<p>If you want to compare the means of multiple groups, you could use a different statistical method like the ANOVA test. ANOVA tests for differences in the means of multiple groups and is an extension of the t-test.</p>
 </section>
 </section>
 <section id="matrix-data-and-frequency-tests" class="level2">
@@ -1250,7 +1254,7 @@ mean difference
 </div>
 </div>
 <p>Now the matrix is saved and is called twoBytwo.</p>
-<p><strong>Note:</strong> <code>nrow</code> specifies the number of rows (alternatively you can specify the number of columns by <code>ncol</code>). The default parameters assume numbers in the list fill the first column, then fill the second column and so on. This can be changed by the <code>byrow</code> argument.</p>
+<p><strong>Note:</strong> <code>nrow</code> specifies the number of rows (alternatively you can specify the number of columns by <code>ncol</code>). The default parameters fill the matrix one column at a time. The <code>byrow</code> argument instructs the function to fill the matrix one row at a time.</p>
 <section id="chi-squared-and-fishers-exact-tests-count-based-data" class="level3">
 <h3 class="anchored">Chi-squared and Fisher’s Exact Tests (Count based data)</h3>
 <p>We can place count based data in a matrix to perform statistical tests. For instance, when observing the presence of a fluorescent marker in wild-type and mutant cells we want to know if there is a significant difference between the 2 cell types?</p>
@@ -1414,12 +1418,13 @@ sample estimates:
 6 10.0   VC  0.5</code></pre>
 </div>
 </div>
+<p>The <code>toothgrowth</code> dataset contains the length of odontoblasts (teeth) in 60 guinea pigs. Each animal received one of three dose levels of vitamin C (0.5, 1, and 2 mg/day) by one of two delivery methods (orange juice or ascorbic acid).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Group the data by dose and run a t_test between the two groups for each dose.</span></span>
-<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a>stat.test <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dose) <span class="sc">%&gt;%</span></span>
-<span id="cb127-4"><a href="#cb127-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t_test</span>(len <span class="sc">~</span> supp) <span class="sc">%&gt;%</span></span>
-<span id="cb127-5"><a href="#cb127-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adjust_pvalue</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a>stat.test <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dose) <span class="sc">|&gt;</span></span>
+<span id="cb127-4"><a href="#cb127-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t_test</span>(len <span class="sc">~</span> supp) <span class="sc">|&gt;</span></span>
+<span id="cb127-5"><a href="#cb127-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adjust_pvalue</span>() <span class="sc">|&gt;</span></span>
 <span id="cb127-6"><a href="#cb127-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_significance</span>(<span class="st">"p.adj"</span>)</span>
 <span id="cb127-7"><a href="#cb127-7" aria-hidden="true" tabindex="-1"></a>stat.test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

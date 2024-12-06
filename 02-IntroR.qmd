@@ -216,13 +216,13 @@ Here, `mydata` is an object name and the syntax `<-` assigns the output of the f
 
 For a beginner, this can be the hardest part, it is also the most important part to get right.
 
-It is possible to create a vector by typing data directly into R using the combine function `c`. Think of it as a concatenate or combine function.
+It is possible to create a vector by typing data directly into R using the function `c`. Think of it as a concatenate or combine function.
 
 ```{r}
 x   <-  c(1,2,3,4,5)
 ```
 
-This creates a vector named 'x' which stores the numbers 1-5.
+This creates a vector named 'x' which stores the numbers 1 - 5.
 
 You can see what is in an object at any time by typing its name:
 
@@ -230,7 +230,7 @@ You can see what is in an object at any time by typing its name:
 x
 ```
 
-Character values needs to be quoted, otherwise R will look for a data object of that name.
+Character values need to be quoted, otherwise R will look for a data object of that name.
 
 ```{r}
 daysofweek <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
@@ -272,7 +272,7 @@ By default the `read.table` function assumes certain things from the file
 -   There is **no** header row (labels for the columns)
 -   There is no column with names for the rows
 
-If any of these are FALSE, we need to tell that to the function. If it has a header column use 'header=TRUE' argument.
+If any of these are FALSE, we need to tell that to the function. If it has a header column use the 'header=TRUE' argument.
 
 ```{r}
 mydata <- read.table("http://bifx-core3.bio.ed.ac.uk/data.tsv", header=TRUE)  # header=T also works
@@ -296,7 +296,7 @@ mydata$A
 
 ### Other options for read.table
 
-Use `sep=` to define how columns are separated in your input file. This file uses the tab character which we can write as '\t'.
+Use `sep=` to define how columns are separated in your input file. This file uses the tab character which we can write as "\\t".
 
 ```{r}
 mydata  <- read.table("http://bifx-core3.bio.ed.ac.uk/data.tsv", header=T, sep="\t")
@@ -516,9 +516,9 @@ R has many functions for statistical testing.
 Please see our [introduction to statistics](https://docs.google.com/presentation/d/1qmtT3W6oylWs9xxeJ0WsNHyHbK6TiUJQsEQtFFVpMtU/edit?usp=sharing) document for more information on distributions, hypothesis testing and statistical significance.
 :::
 
-<br>
+### Difference between means
 
-Let's say we want to determine whether the means of two groups of data differ statistically. First, we need to know if we are dealing with parametric or non-parametric data, i.e. are they normally distributed?
+Let's say we want to determine whether the means of two groups of data differ statistically. First, we need to know if we are dealing with parametric or non-parametric data to choose the appropriate test i.e. are they normally distributed?
 
 ::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
@@ -616,7 +616,7 @@ Use a t-test to decide if the mean values of A and E differ more than expected b
 t.test(A,E)
 ```
 
-The p-value of the test is 0.8032, which is greater than the significance level 0.05. We can conclude that A and E are NOT significantly different. You can also save the result as an object and print the p-value:
+The p-value of the test is 0.8032, which is greater than the significance level 0.05. We can conclude that means of A and E are NOT significantly different. You can also save the result as an object and print the p-value:
 
 ```{r}
 a_e_result <- t.test(A,E)
@@ -643,9 +643,9 @@ What if we want to test non-parametric data? As D is NOT normally distributed we
 wilcox.test(A,D) 
 ```
 
-Non parametric tests look at the ranks of values. If the same value appears multiple times in a dataset then their ranks are tied. R will output a warning if tied ranks exist. We can ignore it in this case but should be wary if there are many ties in our data.
+Non parametric tests look at the ranks of values. If the same value appears multiple times in a dataset then the ranks will also be identical. R will output a warning if "tied ranks" exist. We can ignore it in this case but should be wary if there are many ties in our data.
 
-The p-value of the test is `0.01496`, which is less than the significance level alpha = 0.05. We can conclude that A is significantly different from D.
+The p-value of the test is `0.01496`, which is less than the significance level alpha = 0.05. We can conclude that the mean of A is significantly different from the mean of D.
 
 ### Paired samples
 
@@ -710,6 +710,8 @@ pvals <- c(0.0001, 0.05, 0.001, 0.1, 0.1, 0.1, 0.1,0.5,0.5,0.5)
 p.adjust(pvals)
 ```
 
+If you want to compare the means of multiple groups, you could use a different statistical method like the ANOVA test. ANOVA tests for differences in the means of multiple groups and is an extension of the t-test.
+
 ## Matrix Data and Frequency Tests
 
 A matrix consists of values from the same data class, structured into rows and columns. You can turn a data frame into a matrix using the `as.matrix()` function.
@@ -733,7 +735,7 @@ twoBytwo
 
 Now the matrix is saved and is called twoBytwo.
 
-**Note:** `nrow` specifies the number of rows (alternatively you can specify the number of columns by `ncol`). The default parameters assume numbers in the list fill the first column, then fill the second column and so on. This can be changed by the `byrow` argument.
+**Note:** `nrow` specifies the number of rows (alternatively you can specify the number of columns by `ncol`). The default parameters fill the matrix one column at a time. The `byrow` argument instructs the function to fill the matrix one row at a time.
 
 ### Chi-squared and Fisher's Exact Tests (Count based data)
 
@@ -863,12 +865,14 @@ df$dose <- as.factor(df$dose)
 head(df)
 ```
 
+The `toothgrowth` dataset contains the length of odontoblasts (teeth) in 60 guinea pigs. Each animal received one of three dose levels of vitamin C (0.5, 1, and 2 mg/day) by one of two delivery methods (orange juice or ascorbic acid).
+
 ```{r}
 ## Group the data by dose and run a t_test between the two groups for each dose.
-stat.test <- df %>%
-  group_by(dose) %>%
-  t_test(len ~ supp) %>%
-  adjust_pvalue() %>%
+stat.test <- df |>
+  group_by(dose) |>
+  t_test(len ~ supp) |>
+  adjust_pvalue() |>
   add_significance("p.adj")
 stat.test
 ```
