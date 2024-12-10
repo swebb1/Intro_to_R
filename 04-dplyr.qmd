@@ -7,6 +7,7 @@ title: "dplyr"
 ```{=html}
 <script src="https://kit.fontawesome.com/ece750edd7.js" crossorigin="anonymous"></script>
 ```
+
 </head>
 
 ```{r global_options, include=FALSE}
@@ -110,7 +111,7 @@ R version 4.1 introduced a native pipe which can be used in base R without loadi
 
 <br>
 
-::: challenge
+:::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
 
 Using pipes, subset the `surveys` data to include animals collected before 1995 and retain only the columns `year`, `sex`, and `weight`.
@@ -132,7 +133,7 @@ surveys |>
 :::
 
 </details>
-:::
+::::
 
 ## Exporting data
 
@@ -149,7 +150,7 @@ write_csv(surveys_sml, file = "data/surveys_small.csv")
 You can even pipe directly into `write_csv` to avoid creating another R object.
 
 ```{r, eval=F}
-surveys %>%
+surveys |>
   filter(weight < 5) |>
   select(species_id, sex, weight) |> 
   write_csv(file = "data/surveys_small.csv")
@@ -163,14 +164,14 @@ To create a new column of weight in kg:
 
 ```{r, eval=F,purl = FALSE}
 surveys |>
-  mutate(weight_kg = weight * 1000)
+  mutate(weight_kg = weight / 1000)
 ```
 
 You can also create a second new column based on the first new column within the same call of `mutate()`:
 
 ```{r, eval=F, purl = FALSE}
 surveys |>
-  mutate(weight_kg = weight * 1000,
+  mutate(weight_kg = weight / 1000,
          weight_lb = weight_kg * 2.2)
 ```
 
@@ -218,7 +219,7 @@ surveys |>
 
 ```
 
-::: challenge
+:::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
 
 Create a new data frame from the `surveys` data that meets the following criteria: Contains only the `species_id` column and a new column called `hindfoot_cm` containing the `hindfoot_length` values converted to centimeters. In this `hindfoot_cm` column all values are less than 3.
@@ -243,7 +244,7 @@ surveys_hindfoot_cm <- surveys |>
 :::
 
 </details>
-:::
+::::
 
 ## Group_by and summarise
 
@@ -326,7 +327,7 @@ surveys |>
   arrange(species, desc(n))
 ```
 
-::: challenge
+:::::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
 
 How many animals were caught in each `plot_type` surveyed?
@@ -393,7 +394,7 @@ surveys |>
 :::
 
 </details>
-:::
+::::::
 
 <br>
 
