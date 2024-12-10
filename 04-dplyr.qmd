@@ -197,7 +197,7 @@ surveys |>
 The `stringr` package within the Tidyverse contains a lot of useful functions for manipulating character strings. For instance, let's imagine that the genus 'Perognathus' has been mislabeled in our table and should instead be 'Peromyscus'.
 
 ```{r, eval=F,purl = FALSE}
-surveys %>%
+surveys |>
   mutate(genus = str_replace(genus,"Perognathus","Peromyscus"))
 ```
 
@@ -304,7 +304,7 @@ surveys |>
     count(sex) 
 ```
 
-The `count()` function is shorthand for something we've already seen: grouping by a variable, and summarising it by counting the number of observations in that group. In other words, `surveys %>% count(sex)` is equivalent to:
+The `count()` function is shorthand for something we've already seen: grouping by a variable, and summarising it by counting the number of observations in that group. In other words, `surveys |> count(sex)` is equivalent to:
 
 ```{r, eval = F, purl = FALSE}
 surveys |>
