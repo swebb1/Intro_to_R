@@ -563,12 +563,6 @@ ggsave("IrisScatterplot.pdf", p)
 
 The image format is automatically assigned from the file extension you use in the filename. Within `ggsave()` you can also set the resolution for the image as well as the length and width for the image. See the help page for ggsave for more options.
 
-::: challenge
-<h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
-
-Spend the remaining time playing around with the different ggplot options and see if you can create an interesting and appealing visualisation with a dataset of your choice. Use the ggplot cheatsheet or the [R graph gallery](https://www.r-graph-gallery.com/index.html) for inspiration!
-:::
-
 ## Arranging multiple plots
 
 Placing ggplots side by side can be performed with packages like `gridExtra` and `patchwork`. [Patchwork](https://github.com/thomasp85/patchwork) uses simple formulas to arrange ggplots:
@@ -726,13 +720,13 @@ pmain <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species))+
 # Marginal densities along x axis
 xdens <- axis_canvas(pmain, axis = "x")+
   geom_density(data = iris, aes(x = Sepal.Length, fill = Species),
-              alpha = 0.7, size = 0.2)+
+              alpha = 0.7, linewidth = 0.2)+
   ggpubr::fill_palette("jco")
 # Marginal densities along y axis
 # Need to set coord_flip = TRUE, if you plan to use coord_flip()
 ydens <- axis_canvas(pmain, axis = "y", coord_flip = TRUE)+
   geom_density(data = iris, aes(x = Sepal.Width, fill = Species),
-                alpha = 0.7, size = 0.2)+
+                alpha = 0.7, linewidth = 0.2)+
   coord_flip()+
   ggpubr::fill_palette("jco")
 p1 <- insert_xaxis_grob(pmain, xdens, grid::unit(.2, "null"), position = "top")
@@ -740,8 +734,8 @@ p2<- insert_yaxis_grob(p1, ydens, grid::unit(.2, "null"), position = "right")
 ggdraw(p2)
 ```
 
-::: challenge
-<h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
+::: resources
+<h2><i class="fas fa-pencil-alt"></i> Final Challenge:</h2>
 
 Spend the remaining time playing around with the different ggplot options and see if you can create an interesting and appealing visualisation with a dataset of your choice. \
 \
