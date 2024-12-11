@@ -7,6 +7,7 @@ title: "ggplot2"
 ```{=html}
 <script src="https://kit.fontawesome.com/ece750edd7.js" crossorigin="anonymous"></script>
 ```
+
 </head>
 
 ```{r global_options, include=FALSE}
@@ -177,7 +178,7 @@ Try altering the `binwidth` parameter to see how this affects the plot.
 
 <br>
 
-::: challenge
+:::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
 
 Use what you have learned to create a scatterplot of Sepal.Width over Species.
@@ -197,7 +198,7 @@ ggplot(iris, aes(x=Species, y=Sepal.Width )) + geom_point()
 :::
 
 </details>
-:::
+::::
 
 ## Boxplots
 
@@ -251,7 +252,7 @@ b + geom_jitter(aes(colour=Species))
 
 ## Violin plots
 
-::: challenge
+::::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
 
 Boxplots are useful summaries, but hide the shape of the distribution. For example, if the distribution is bimodal, we would not see it in a boxplot. An alternative to the boxplot is the violin plot, where the shape of the density of points is drawn.
@@ -297,7 +298,7 @@ ggplot(iris, aes(x=fct_reorder(Species,Sepal.Width), y=Sepal.Width)) +
 :::
 
 </details>
-:::
+:::::
 
 ## Themes
 
@@ -446,7 +447,7 @@ ggplot(iris2, aes(x=Petal.Length, y=Petal.Width, colour=Sepal.Ratio)) +
   geom_point()
 ```
 
-::: challenge
+:::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
 
 See if you can represent some of the other variables from the iris dataset in this plot as well. **Hint:** There are several other aesthetic mappings such as `size` and `shape`.
@@ -467,7 +468,7 @@ ggplot(iris2, aes(x=Petal.Length, y=Petal.Width, colour=Sepal.Ratio, shape=Speci
 :::
 
 </details>
-:::
+::::
 
 ## Faceting
 
@@ -499,7 +500,7 @@ q2 <- ggplot(iris2, aes(x = Petal.Length, y = Petal.Width, colour = Sepal.Ratio)
 q2 + facet_grid(Country ~ Species)
 ```
 
-::: challenge
+:::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
 
 Use dplyr and ggplot to display the mean petal length for each species in each country except for those found in France. Use colouring and faceting to enhance the plot.
@@ -523,7 +524,7 @@ ggplot(aes(x=Country, y=Mean, colour=Species)) + geom_point(size=4) + facet_wrap
 :::
 
 </details>
-:::
+::::
 
 ## Adding labels
 
@@ -696,7 +697,7 @@ gg <- ggplot(iris2, aes(x = Sepal.Length, y = Sepal.Width,  colour = Species, to
 girafe(ggobj = gg)
 ```
 
-### Creating detailed graphics with ggpubr**
+### Creating detailed graphics with ggpubr
 
 The `ggpubr` package provides wrapper functions for ggplot that make it easier to generate complex, publication ready graphics. It includes functions for running statistical tests and displaying the results in the plot. After using ggpubr, you will need to reset your theme with `theme_set()`.
 
@@ -742,7 +743,15 @@ ggdraw(p2)
 ::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
 
-Spend the remaining time playing around with the different ggplot options and see if you can create an interesting and appealing visualisation with a dataset of your choice. Use the ggplot cheatsheet or the [R graph gallery](https://www.r-graph-gallery.com/index.html) for inspiration!
+Spend the remaining time playing around with the different ggplot options and see if you can create an interesting and appealing visualisation with a dataset of your choice. \
+\
+Use these resources for inspiration!
+
+-   [ggplot cheatsheet](https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf)
+
+-   [R graph gallery](https://www.r-graph-gallery.com/index.html)
+
+-   [ggplot extensions](https://exts.ggplot2.tidyverse.org/gallery/)
 :::
 
 <br>
