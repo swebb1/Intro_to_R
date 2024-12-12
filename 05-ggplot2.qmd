@@ -143,7 +143,7 @@ p + geom_point(colour="red")
 Not very informative though, let's start again and colour the points by species. Note as well that the x and y labels are also not neccessary if the data is in the correct order.
 
 ```{r}
-p<-ggplot(iris, aes(Sepal.Length, Sepal.Width, colour=Species) ) +  geom_point()
+p <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour=Species) ) +  geom_point()
 p
 ```
 
@@ -165,7 +165,7 @@ Here is an example of the histogram geometry:
 #Create a new version of the iris dataset with a new column
 iris2 <- iris |> mutate(Sepal.Ratio=Sepal.Length/Sepal.Width)
 #Visualise the distribution of Sepal.Ratio with a histogram
-h<- ggplot(iris2, aes(Sepal.Ratio, fill=Species )) +
+h <- ggplot(iris2, aes(Sepal.Ratio, fill=Species )) +
   geom_histogram(binwidth=0.1)
 h
 ```
@@ -305,7 +305,7 @@ ggplot(iris, aes(x=fct_reorder(Species,Sepal.Width), y=Sepal.Width)) +
 Recap:
 
 ```{r}
-p<-ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, colour=Species)) +  geom_point()
+p <- ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, colour=Species)) +  geom_point()
 ```
 
 We can continue to modify this scatter plot. Let's make the axis a bit prettier with the xlab() and ylab() functions:
@@ -410,7 +410,7 @@ q + scale_color_gradient2(high="darkred", low="white",  mid="red", midpoint=2)
 There are also colour scales for discrete variables. Note that we must use `fill` for colouring boxes.
 
 ```{r}
-bp<- ggplot(iris2,aes(Species,Sepal.Length,fill=Species)) +
+bp <- ggplot(iris2,aes(Species,Sepal.Length,fill=Species)) +
   geom_boxplot()
 #Default
 bp + scale_fill_discrete()
@@ -429,13 +429,19 @@ Alternatively you can manually choose your own colours:
 h + scale_fill_manual(values = c("forest green","dodger blue", "firebrick"))
 ```
 
+You can use hex codes for colours:
+
+```{r}
+h + scale_fill_manual(values = c("#DDDD33","#EE3344", "#1133FF"))
+```
+
 ::: resources
 <h2><i class="fas fa-book"></i> Further Learning</h2>
 
 The options for colouring graphs are huge.
 
 -   [Color brewer 2](http://colorbrewer2.org) is a great site for getting the hex values of colours to suit needs such as printer or colour blind friendliness.
--   [Coolors](http://coolors.co) and [Colormind](colormind.io) are colour palette generators.
+-   [Coolors](http://coolors.co) and [Colormind](http://colormind.io/) are colour palette generators.
 :::
 
 ## Adding more variables
@@ -632,7 +638,7 @@ For axes with large values or very dispersed values it can be useful to rescale 
 
 ```{r}
 #We can transform the values in our ggplot call:
-ggplot(surveys,aes(log10(weight),hindfoot_length))+geom_point()
+ggplot(surveys,aes(log10(weight),hindfoot_length)) + geom_point()
 ```
 
 ```{r}
@@ -653,15 +659,15 @@ What is the difference between these three plots?
 
 ```{r}
 library(plotly)
-p2<-ggplot(iris2,aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) + geom_point()
-gp2<-ggplotly(p2)
+p2 <- ggplot(iris2,aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) + geom_point()
+gp2 <- ggplotly(p2)
 ```
 
 By default the mouse over text is what is mapped in the aesthetics. You can add a `text` aesthetic to add this to the tooltip text.
 
 ```{r,warning=F}
 p2 <- p2+ geom_point(aes(text = Country))
-gp2<-ggplotly(p2)
+gp2 <- ggplotly(p2)
 ```
 
 Interactive `plotly` graphics open in the *Viewer* pane in Rstudio and can be embedded in `R Markdown` documents. Alternatively you can save them as individual web pages using the `htmlwidgets` package:
@@ -704,8 +710,8 @@ my_comparisons <- list( c("0.5", "1"), c("1", "2"), c("0.5", "2") )
 
 ggviolin(df, x = "dose", y = "len", fill = "dose",
          palette = c("#00AFBB", "#E7B800", "#FC4E07"),
-         add = "boxplot", add.params = list(fill = "white"))+
-  stat_compare_means(comparisons = my_comparisons, label = "p.signif")+ # Add significance levels
+         add = "boxplot", add.params = list(fill = "white")) +
+  stat_compare_means(comparisons = my_comparisons, label = "p.signif") + # Add significance levels
   stat_compare_means(label.y = 50)                                      # Add p-value 
 ```
 
@@ -714,11 +720,11 @@ The next example additionally uses the library `cowplot` to add density plots wi
 ```{r}
 library(cowplot) 
 # Main plot
-pmain <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species))+
-  geom_point()+
+pmain <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point() +
   ggpubr::color_palette("jco")
 # Marginal densities along x axis
-xdens <- axis_canvas(pmain, axis = "x")+
+xdens <- axis_canvas(pmain, axis = "x") +
   geom_density(data = iris, aes(x = Sepal.Length, fill = Species),
               alpha = 0.7, linewidth = 0.2)+
   ggpubr::fill_palette("jco")
@@ -727,17 +733,17 @@ xdens <- axis_canvas(pmain, axis = "x")+
 ydens <- axis_canvas(pmain, axis = "y", coord_flip = TRUE)+
   geom_density(data = iris, aes(x = Sepal.Width, fill = Species),
                 alpha = 0.7, linewidth = 0.2)+
-  coord_flip()+
+  coord_flip() +
   ggpubr::fill_palette("jco")
 p1 <- insert_xaxis_grob(pmain, xdens, grid::unit(.2, "null"), position = "top")
-p2<- insert_yaxis_grob(p1, ydens, grid::unit(.2, "null"), position = "right")
+p2 <- insert_yaxis_grob(p1, ydens, grid::unit(.2, "null"), position = "right")
 ggdraw(p2)
 ```
 
 ::: resources
 <h2><i class="fas fa-pencil-alt"></i> Final Challenge:</h2>
 
-Spend the remaining time playing around with the different ggplot options and see if you can create an interesting and appealing visualisation with a dataset of your choice. \
+Spend the remaining time playing around with the different ggplot options and see if you can create an interesting and appealing visualisation with a dataset of your choice.\
 \
 Use these resources for inspiration!
 
